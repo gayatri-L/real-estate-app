@@ -8,6 +8,7 @@ const useOpenAI = () => {
     location: "",
     question: "",
   });
+  const apiKey = process.env.OpenAIKey;
 
   const fetchAIResponse = async (userInput) => {
     if (!userInput.trim()) return;
@@ -19,7 +20,7 @@ const useOpenAI = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer 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`, // Replace with your OpenAI key
+          Authorization: `Bearer ${apiKey}`, // Replace with your OpenAI key
         },
         body: JSON.stringify({
           model: "gpt-4o-mini",
