@@ -110,7 +110,7 @@
 // export default Home;
 import React, { useEffect, useState } from "react";
 import Lottie from "lottie-react";
-import Header from "../Components/Header";
+//import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import YourPreferences from "../Components/YourPreferences";
 import ChatResponse from "../Components/ChatResponse"; // Import ChatResponse
@@ -138,7 +138,7 @@ const Home = () => {
 
   return (
     <div className="bg-black min-h-screen text-white flex flex-col">
-      <Header />
+    {/* <Header /> */}
 
       {showFirstPage ? (
         <main className="flex flex-col items-center justify-center flex-grow text-center">
@@ -169,6 +169,7 @@ const Home = () => {
 
           {/* Right Side - Your Preferences (Display Extracted Data) */}
           <YourPreferences data={preferences} />
+          
         </main>
       )}
       <Footer />

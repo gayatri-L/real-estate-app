@@ -2,6 +2,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+
 const YourPreferences = ({ data }) => {
   const navigate = useNavigate();
 
@@ -40,6 +41,7 @@ const YourPreferences = ({ data }) => {
         <p className="text-red-500 mt-2">Please fill in all details.</p>
       )}
     </aside>
+       
   );
 };
 

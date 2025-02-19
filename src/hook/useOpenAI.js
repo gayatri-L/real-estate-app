@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+ 
 const useOpenAI = () => {
   const [aiResponse, setAiResponse] = useState("");
   const [preferences, setPreferences] = useState({
@@ -21,7 +21,7 @@ const useOpenAI = () => {
     }
 
     setAiResponse("Thinking... 🤔");
-
+ 
     try {
       const response = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
@@ -41,36 +41,36 @@ const useOpenAI = () => {
           ],
         }),
       });
-
+ 
       if (!response.ok) {
         throw new Error(`API Error: ${response.status}`);
       }
-
+ 
       const data = await response.json();
       console.log("Raw API Response:", data); // Debugging step
 
       let aiText = data?.choices?.[0]?.message?.content || "No response from AI";
-
+ 
       let parsedResponse = {
         bedrooms: "",
         budget: "",
         location: "",
         question: aiText, // Default to raw text if JSON parsing fails
       };
-
+ 
       try {
         parsedResponse = JSON.parse(aiText);
       } catch (error) {
         console.warn("AI response is not valid JSON, using fallback.");
       }
-
+ 
       setPreferences({
         bedrooms: parsedResponse.bedrooms || "",
         budget: parsedResponse.budget || "",
         location: parsedResponse.location || "",
         question: parsedResponse.question || aiText,
       });
-
+ 
       setAiResponse(parsedResponse.question || aiText);
       return parsedResponse;
     } catch (error) {
@@ -79,8 +79,8 @@ const useOpenAI = () => {
       return{question: "Error fetching response. Please try again."};
     }
   };
-
+ 
   return { aiResponse, preferences, fetchAIResponse };
 };
-
+ 
 export default useOpenAI;

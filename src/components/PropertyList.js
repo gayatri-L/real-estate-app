@@ -1,15 +1,44 @@
+// import React from "react";
+
+// const PropertyList = ({ properties }) => {
+//   return (
+//     <div className="property-list">
+//       <h3>Available Properties</h3>
+//       <ul>
+//         {properties.map((property) => (
+//           <li key={property.id}>
+//             <h4>{property.name}</h4>
+//             <p>Location: {property.location}</p>
+//             <p>Area:{property.area}</p>
+//             <p>Price: ₹{property.price.toLocaleString()}</p>
+//             <p>BHK: {property.bhk}</p>
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// };
 import React from "react";
 
 const PropertyList = ({ properties }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {properties.map((property, index) => (
-        <div key={index} className="bg-gray-900 p-4 rounded-lg text-center border border-yellow-500">
-          <img src={property.image} alt={property.name} className="w-full rounded-md mb-2" />
-          <h4 className="text-lg font-semibold">{property.name}</h4>
-          <p className="text-yellow-500">{property.price.toLocaleString()} ₹</p>
-        </div>
-      ))}
+    <div className="property-list">
+      <h3>Available Properties</h3>
+      {properties.length === 0 ? (
+        <p>No properties found for selected filters.</p>
+      ) : (
+        <ul>
+          {properties.map((property) => (
+            <li key={property.id}>
+              <h4>{property.name}</h4>
+              <p>Location: {property.location}</p>
+              <p>Area: {property.area}</p>
+              <p>Price: ₹{property.price.toLocaleString()}</p>
+              <p>BHK: {property.bhk}</p>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
