@@ -1,5 +1,6 @@
 import React from "react";
 
+
 const YourPreferences = ({ data }) => {
   return (
     <aside className="w-1/4 p-4 bg-gray-800 text-white">
@@ -10,6 +11,7 @@ const YourPreferences = ({ data }) => {
         <li><strong>Location:</strong> {data.location || "N/A"}</li>
       </ul>
     </aside>
+       
   );
 };
 

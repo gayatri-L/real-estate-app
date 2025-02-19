@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Lottie from "lottie-react";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
-import YourPreferences from "../Components/YourPreferences";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import YourPreferences from "../components/YourPreferences";
 import { Send } from "@mui/icons-material";
 import useOpenAI from "../hook/useOpenAI";
 
@@ -100,6 +100,7 @@ const Home = () => {
 
           {/* Right Side - Your Preferences (Display Extracted Data) */}
           <YourPreferences data={preferences} />
+          
         </main>
       )}
 
