@@ -9,7 +9,7 @@ const useOpenAI = () => {
     question: "",
   });
  
-  const apiKey = "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";
+  const apiKey = process.env.REACT_APP_OPENAI_KEY;
  
   const fetchAIResponse = async (userInput) => {
     if (!userInput.trim()) return;

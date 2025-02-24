@@ -26,6 +26,10 @@ pool.connect()
       if (!contact_email || !project_name || !project_launch || !contact_phonenumber) {
         return res.status(400).json({ error: "All fields are required" });
       }
+
+      if (!/^\d{10}$/.test(contact_phonenumber)) {
+        return res.status(400).json({ error: "Contact number must be exactly 10 digits" });
+      }
   
       // Fetch the last inserted org_id from the Organization table
       const orgResult = await pool.query("SELECT org_id FROM Organization ORDER BY org_id DESC LIMIT 1");
@@ -52,7 +56,10 @@ pool.connect()
       });
   
     } catch (err) {
-      console.error("Error inserting data:", err);
+      if (err.code === "23505") {  // PostgreSQL unique violation error code
+        return res.status(400).json({ error: "Contact number already exists. Please use a different number." });
+      }
+  
       res.status(500).json({ error: "Internal Server Error" });
     }
   });

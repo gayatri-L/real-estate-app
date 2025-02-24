@@ -162,7 +162,7 @@ app.get("/filter-details", async (req, res) => {
     FROM 
       Project_Details pd
     LEFT JOIN 
-      Project_RearaDetails prd ON pd.Project_Id = prd.ReraId
+      Project_ReraDetails prd ON pd.Project_Id = prd.ReraId
     LEFT JOIN 
       Wing_Details wd ON pd.Project_Id = wd.Project_Id
     WHERE 1=1`;  // Base query

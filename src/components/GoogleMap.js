@@ -32,7 +32,44 @@
 // export default GoogleApiWrapper({
 //   apiKey: "AIzaSyA2ddaLdvbkN_17pvuYqXp1YoM7zJAm2qg",
 // })(GoogleMap);
-import React from "react";
+
+// =======imp=====
+// import React from "react";
+// import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+
+// const containerStyle = {
+//   width: "100%",
+//   height: "400px",
+// };
+
+// const MapComponent = ({ center, properties }) => {
+//   console.log("Properties for Markers:", properties);
+//   return (
+//     <LoadScript googleMapsApiKey="AIzaSyA2ddaLdvbkN_17pvuYqXp1YoM7zJAm2qg">
+//       <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={12}>
+//         {/* {properties.map((property) => (
+//           <Marker key={property.id} position={{ lat: property.lat, lng: property.lng }} />
+//         ))} */}
+
+//           {properties.map((property) => (
+//           <Marker
+//           key={property.id}
+//           position={{
+//             lat: property.latitude,
+//             lng: property.longitude,
+//           }}
+//           title={property.name || "Property Location"}
+//         />
+//         ))}
+//       </GoogleMap>
+      
+//     </LoadScript>
+   
+//   );
+// };
+
+// export default MapComponent;
+import React, { useState, useCallback } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
 const containerStyle = {
@@ -41,13 +78,37 @@ const containerStyle = {
 };
 
 const MapComponent = ({ center, properties }) => {
+  const [mapLoaded, setMapLoaded] = useState(false);
+
+  const onLoad = useCallback(() => {
+    console.log("Google Maps Loaded");
+    setMapLoaded(true);
+  }, []);
+
+  console.log("Properties for Markers:", properties);
+
   return (
-    <LoadScript googleMapsApiKey="AIzaSyA2ddaLdvbkN_17pvuYqXp1YoM7zJAm2qg">
-      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={12}>
-        {properties.map((property) => (
-          <Marker key={property.id} position={{ lat: property.lat, lng: property.lng }} />
-        ))}
-      </GoogleMap>
+    <LoadScript
+      googleMapsApiKey="AIzaSyA2ddaLdvbkN_17pvuYqXp1YoM7zJAm2qg"
+      onLoad={onLoad}
+      onError={() => console.error("Error loading Google Maps API")}
+    >
+      {mapLoaded ? (
+        <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={12}>
+          {properties.map((property) => (
+            <Marker
+              key={property.id}
+              position={{
+                lat: parseFloat(property.latitude),
+                lng: parseFloat(property.longitude),
+              }}
+              title={property.name || "Property Location"}
+            />
+          ))}
+        </GoogleMap>
+      ) : (
+        <p>Loading Map...</p>
+      )}
     </LoadScript>
   );
 };
