@@ -1,154 +1,37 @@
-// require("dotenv").config();
-// const express = require("express");
-// const cors = require("cors");
-// const { Pool } = require("pg");
-
-// const app = express();
-// const port = process.env.PORT || 5000;
-
-// // Middleware
-// app.use(cors());
-// app.use(express.json()); // To parse JSON request body
-
-// // PostgreSQL Database Connection
-// const pool = new Pool({
-//   user: process.env.DB_USER,      // Your PostgreSQL username
-//   host: process.env.DB_HOST,      // Usually "localhost"
-//   database: process.env.DB_NAME,  // Your database name
-//   password: process.env.DB_PASS,  // Your PostgreSQL password
-//   port: process.env.DB_PORT,      // Default PostgreSQL port is 5432
-// });
-
-// // Test Database Connection
-// pool.connect()
-//   .then(() => console.log("Connected to PostgreSQL ✅"))
-//   .catch((err) => console.error("Connection error ❌", err));
-
-// // API Route: Get Properties Based on Filters
-// app.get("/properties", async (req, res) => {
-//   try {
-//     const { area, budget, bhk } = req.query;
-
-//     let query = "SELECT * FROM properties WHERE 1=1"; // Dynamic query construction
-//     let values = [];
-
-//     if (area) {
-//       query += " AND location = $1";
-//       values.push(area);
-//     }
-//     if (budget) {
-//       query += ` AND price <= $${values.length + 1}`;
-//       values.push(budget);
-//     }
-//     if (bhk) {
-//       query += ` AND bhk = $${values.length + 1}`;
-//       values.push(bhk);
-//     }
-
-//     const result = await pool.query(query, values);
-//     res.json(result.rows);
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).send("Server Error");
-//   }
-// });
-
-// // Start the Server
-// app.listen(port, () => {
-//   console.log(`Server running on http://localhost:${port}`);
-// });
-
-// ------Important------------
-// require("dotenv").config();
-// const express = require("express");
-// const cors = require("cors");
-// const { Pool } = require("pg");
-
-// const app = express();
-// const port = process.env.PORT || 5000;
-
-// // Middleware
-// app.use(cors());
-// app.use(express.json()); // To parse JSON request body
-
-// // PostgreSQL Database Connection
-// const pool = new Pool({
-//   user: process.env.DB_USER,      // Your PostgreSQL username
-//   host: process.env.DB_HOST,      // Usually "localhost"
-//   database: process.env.DB_NAME,  // Your database name
-//   password: process.env.DB_PASS,  // Your PostgreSQL password
-//   port: process.env.DB_PORT,      // Default PostgreSQL port is 5432
-// });
-
-// // Test Database Connection
-// pool.connect()
-//   .then(() => console.log("Connected to PostgreSQL ✅"))
-//   .catch((err) => console.error("Connection error ❌", err));
-
-// // API Route: Get Properties Based on Filters
-// app.get("/properties", async (req, res) => {
-//   try {
-//     const { area, location, budget, bhk } = req.query;
-//     let query = "SELECT * FROM properties WHERE 1=1"; // Base query
-//     let values = [];
-    
-//     // Dynamic Query Building
-//     if (location) {
-//       values.push(location);
-//       query += ` AND location = $${values.length}`;
-//     }
-//     if (area) {
-//       values.push(area);
-//       query += ` AND area = $${values.length}`;
-//     }
-//     if (budget) {
-//       values.push(parseInt(budget)); // Ensure it's a number
-//       query += ` AND price <= $${values.length}`;
-//     }
-//     if (bhk) {
-//       values.push(parseInt(bhk)); // Ensure it's a number
-//       query += ` AND bhk = $${values.length}`;
-//     }
-
-//     const result = await pool.query(query, values);
-//     res.json(result.rows);
-//   } catch (err) {
-//     console.error("Error fetching properties:", err);
-//     res.status(500).send("Server Error");
-//   }
-// });
-
-// // Start the Server
-// app.listen(port, () => {
-//   console.log(`Server running on http://localhost:${port}`);
-// });
-// -----------Important-----------
-
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const { Pool } = require("pg");
 
+
 const app = express();
 const port = process.env.PORT || 5000;
 
-// Middleware
 app.use(cors());
-app.use(express.json()); // To parse JSON request body
+app.use(express.json()); // Middleware to parse JSON
+
+console.log("DB User:", process.env.DB_USER);
+console.log("DB Password:", process.env.DB_PASS ? "Loaded" : "Missing");
 
 // PostgreSQL Database Connection
 const pool = new Pool({
-  user: process.env.DB_USER,      // Your PostgreSQL username
-  host: process.env.DB_HOST,      // Usually "localhost"
-  database: process.env.DB_NAME,  // Your database name
-  password: process.env.DB_PASS,  // Your PostgreSQL password
-  port: process.env.DB_PORT,      // Default PostgreSQL port is 5432
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASS,
+  port: process.env.DB_PORT,
 });
 
-// Test Database Connection
-pool.connect()
-  .then(() => console.log("Connected to PostgreSQL ✅"))
-  .catch((err) => console.error("Connection error ❌", err));
+// API to Fetch All Image URLs
+app.get("/api/images", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT id, name, encode(image, 'base64') AS image, mimetype FROM Images");
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Error fetching images:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 // API Route: Get Project, Wing, and Rera Details based on dynamic filters
 app.get("/filter-details", async (req, res) => {
@@ -174,31 +57,28 @@ app.get("/filter-details", async (req, res) => {
     values.push(location);
     query += ` AND pd.Location = $${values.length}`;
   }
-  if (bhkType) {
-    if (bhkType ==="1" ) {
-      query += ` AND pd.BHK_1 = TRUE`;
-    } else if (bhkType === "2") {
-      query += ` AND pd.BHK_2 = TRUE`;
-    } else if (bhkType === "3") {
-      query += ` AND pd.BHK_3 = TRUE`;
-    }
-  }
-
+});
+app.get("/image/:id", async (req, res) => {
   try {
-    const result = await pool.query(query, values);
+    const { id } = req.params;
+
+    const result = await pool.query("SELECT * FROM images WHERE id = $1", [id]);
 
     if (result.rows.length === 0) {
-      return res.status(404).send("No data found for the specified filters");
+      return res.status(404).json({ error: "Image not found" });
     }
 
-    res.json(result.rows);
-  } catch (err) {
-    console.error("Error fetching data:", err);
-    res.status(500).send("Server Error");
+    const image = result.rows[0];
+
+    res.set("Content-Type", image.mimetype);
+    res.send(image.image);
+  } catch (error) {
+    console.error("Error fetching image:", error);
+    res.status(500).json({ error: "Failed to retrieve image" });
   }
 });
 
-// Start the Server
+// Start Server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
