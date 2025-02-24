@@ -1,49 +1,63 @@
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 
 const YourPreferences = ({ data }) => {
   const navigate = useNavigate();
+  const [preferences, setPreferences] = useState(data);
 
-  // Ensure each field has a distinct valid input
-  const isComplete = 
-    typeof data.bedrooms === "string" && data.bedrooms.trim() !== "" &&
-    typeof data.budget === "string" && data.budget.trim() !== "" &&
-    typeof data.location === "string" && data.location.trim() !== "" &&
-    !["value", "Not Provided"].includes(data.bedrooms) &&
-    !["value", "Not Provided"].includes(data.budget) &&
-    !["value", "Not Provided"].includes(data.location) &&
-    !/\s/.test(data.budget); // Ensure budget is a proper number
+  // Update state when new props arrive
+  useEffect(() => {
+    setPreferences(data);
+    console.log("Updated preferences:", data);
+  }, [data]);
 
-  const handleCheckNow = () => {
-    console.log("Navigating with data:", data);
-    navigate("/Display_D", { state: data });
-  };
+  const allPreferencesProvided = preferences.bedrooms && preferences.budget && preferences.location;
 
   return (
-    <aside className="w-1/4 p-4 bg-gray-800 text-white">
-      <h2 className="text-yellow-500 text-lg font-bold">Your Preferences</h2>
-      <ul className="mt-4 space-y-2">
-        <li><strong>Bedrooms:</strong> {data.bedrooms && data.bedrooms !== "value" ? data.bedrooms : "Not Provided"}</li>
-        <li><strong>Budget:</strong> {data.budget && data.budget !== "value" ? data.budget : "Not Provided"}</li>
-        <li><strong>Location:</strong> {data.location && data.location !== "value" ? data.location : "Not Provided"}</li>
-      </ul>
+    <section className="bg-gradient-to-br from-gray-800 to-gray-900 text-white p-6 rounded-xl shadow-lg">
+      <h2 className="text-xl font-extrabold text-yellow-400 mb-5 text-center">
+        🏡 Your Preferences
+      </h2>
 
-      {/* Button appears only if ALL fields are correctly filled */}
-      {isComplete ? (
-        <button 
-          onClick={handleCheckNow} 
-          className="mt-4 bg-yellow-500 text-black px-4 py-2 rounded hover:bg-yellow-600">
-          Check Now
-        </button>
-      ) : (
-        <p className="text-red-500 mt-2">Please fill in all details.</p>
+      <div className="space-y-4">
+        <div className="flex justify-between">
+          <span className="font-semibold">Bedrooms:</span>
+          <span>{preferences.bedrooms || <span className="text-red-400">Not Provided</span>}</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="font-semibold">Budget:</span>
+          <span>{preferences.budget || <span className="text-red-400">Not Provided</span>}</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="font-semibold">Location:</span>
+          <span>{preferences.location || <span className="text-red-400">Not Provided</span>}</span>
+        </div>
+      </div>
+
+      {!allPreferencesProvided && (
+        <p className="text-red-500 mt-4 text-center font-medium animate-pulse">
+          ⚠️ Please fill in all details.
+        </p>
       )}
-    </aside>
+
+      {allPreferencesProvided && (
+        <div className="mt-5 flex justify-center">
+          <button
+            onClick={() => navigate("/properties", { state: preferences })}
+            className="bg-yellow-400 text-black font-bold px-6 py-2 rounded-lg shadow-lg hover:bg-yellow-500 transition duration-300"
+          >
+            🔍 Check Now
+          </button>
+          
+
+        </div>
        
+      )}
+      
+    </section>
+    
   );
 };
 
 export default YourPreferences;
-

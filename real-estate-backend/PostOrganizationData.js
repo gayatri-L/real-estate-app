@@ -41,6 +41,20 @@ app.post("/insert-organization", async (req, res) => {
 
     res.status(201).json({ message: "Organization added successfully!", orgId });
   } catch (err) {
+    if (err.code === '23505') {
+      // PostgreSQL error code for unique constraint violation
+      res.status(400).json({
+        success: false,
+        message: 'Organization with this email already exists. Please use a different email.'
+      });
+    }
+    else {
+      res.status(500).json({
+        success: false,
+        message: 'An error occurred while adding the organization.',
+        error: err.message
+      });
+    }
     console.error("Error inserting organization:", err);
     res.status(500).send("Server Error");
   }
