@@ -429,9 +429,9 @@
 
 import React, { useState, useEffect } from "react";
 import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/api";
-import Header from "../components/Header";
-import PropertyFilters from "../components/PropertyFilters";
-import PropertyList from "../components/PropertyList";
+import Header from "../Components/Header";
+import PropertyFilters from "../Components/PropertyFilters";
+import PropertyList from "../Components/PropertyList";
 
 const Display_D = () => {
   const [selectedLocation, setSelectedLocation] = useState("");
