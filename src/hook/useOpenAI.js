@@ -165,7 +165,7 @@ const useOpenAI = () => {
   const [aiResponse, setAiResponse] = useState("");
   const [preferences, setPreferences] = useState({ bedrooms: "", budget: "", location: "", question: "" });
 
-  const apiKey = process.env.REACT_APP_OPEN_AI_KEY; // Keep this secure!
+  const apiKey = "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"; // Keep this secure!
 
   const fetchAIResponse = async (userInput) => {
     if (!userInput.trim()) return;

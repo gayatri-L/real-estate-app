@@ -120,15 +120,15 @@
 // export default Home;
 import React, { useEffect, useState } from "react";
 import Lottie from "lottie-react";
-import Navbar from "../Components/Navbar";
-import Footer from "../Components/Footer";
-import YourPreferences from "../Components/YourPreferences";
-import ChatResponse from "../Components/ChatResponse";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import YourPreferences from "../components/YourPreferences";
+import ChatResponse from "../components/ChatResponse";
 import useOpenAI from "../hook/useOpenAI";
 
 // Import Material-UI Icons
 // import MenuIcon from "@mui/icons-material/Menu";
-import SidebarMenu from "../Components/SidebarMenu";
+import SidebarMenu from "../components/SidebarMenu";
 
 const Home = () => {
   const [showFirstPage, setShowFirstPage] = useState(true);

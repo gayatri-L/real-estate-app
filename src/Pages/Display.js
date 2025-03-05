@@ -19,7 +19,7 @@ const Display_D = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await fetch("http://localhost:5000/filter-details");
+        const response = await fetch("http://localhost:5000/api/full-details");
         const data = await response.json();
 
         // Ensure valid latitude & longitude

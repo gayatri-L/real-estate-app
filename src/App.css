@@ -8,4 +8,10 @@ html, body {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
+  background-color: black;
+  color: white; /* Ensures text is visible */
+  margin: 0; /* Removes default margin */
+  padding: 0; /* Removes default padding */
+  min-height: 100vh;
 }
+
