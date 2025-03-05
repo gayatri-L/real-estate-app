@@ -29,7 +29,7 @@ const SidebarMenu = () => {
   return (
     <>
       {/* Mobile Toggle Button */}
-      <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden p-2 text-white fixed top-4 left-4 z-50">
+      <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden p-2 text-white fixed top-4  z-50 pb-4 mb-4">
         {isOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
 
@@ -40,7 +40,7 @@ const SidebarMenu = () => {
         } lg:relative lg:translate-x-0 lg:w-64 h-auto w-3/4 sm:w-2/3 md:w-1/2 flex flex-col`}
       >
         {/* Primary Items - Hidden in lg */}
-        <ul className="lg:hidden space-y-2">
+        <ul className="lg:hidden space-y-2 mt-4">
           {primaryItems.map((item, index) => (
             <li key={index} className="flex items-center gap-2 p-2 hover:text-yellow-500 cursor-pointer">
               {item.icon} {item.name}

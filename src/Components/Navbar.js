@@ -15,9 +15,6 @@ const Navbar = () => {
       {/* Center: Navigation Links (Responsive) */}
       <div className="hidden lg:flex space-x-6 text-lg font-semibold">
         <a href="/" className="hover:text-yellow-500">Home</a>
-        <a href="/" className="hover:text-yellow-500">Buy</a>
-        <a href="/" className="hover:text-yellow-500">Rent</a>
-        <a href="/" className="hover:text-yellow-500">Contact</a>
       </div>
 
       {/* Right Side: Brand & Mobile Menu */}
