@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 // import React, { useState, useEffect } from "react";
 // import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 // import Header from "../components/Header";
@@ -132,6 +133,13 @@ import React, { useState, useEffect } from "react";
 import PropertyList from "../components/PropertyList";
 import PropertyFilters from "../components/PropertyFilters";
 import MapComponent from "../components/GoogleMap";
+=======
+import React, { useState, useEffect } from "react";
+import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/api";
+// import Header from "../Components/Header";
+import PropertyFilters from "../Components/PropertyFilters";
+import PropertyList from "../Components/PropertyList";
+>>>>>>> origin/main
 
 const Display_D = () => {
   const [selectedBHK, setSelectedBHK] = useState("");
@@ -217,6 +225,7 @@ const Display_D = () => {
 
 
   return (
+<<<<<<< HEAD
     <div className="w-full p-4 bg-white min-h-screen">
        {/* Display PropertyFilters */}
        <div className="flex flex-col md:flex-row gap-4">
@@ -228,6 +237,53 @@ const Display_D = () => {
             onBudgetChange={setSelectedBudget}
             selectedBudget={selectedBudget}
           />
+=======
+    <div className="w-full overflow-x-hidden">
+      <div className="bg-black text-white min-h-screen">
+        {/* <Header /> */}
+        <div className="p-4 flex flex-col md:flex-row gap-4">
+          {/* Filters Component */}
+          <div className="w-full md:w-1/3 lg:w-1/4">
+            <PropertyFilters
+              onLocationChange={setSelectedLocation}
+              onAreaChange={setSelectedArea}
+              onBHKChange={setSelectedBHK}
+              onBudgetChange={setSelectedBudget}
+              uniqueLocations={uniqueLocations}
+              uniqueAreas={uniqueAreas}
+              uniqueBHKs={uniqueBHKs}
+              uniqueBudgets={uniqueBudgets}
+              selectedLocation={selectedLocation}
+              selectedArea={selectedArea}
+              selectedBHK={selectedBHK}
+              selectedBudget={selectedBudget}
+            />
+          </div>
+
+          {/* Map & Property Listings */}
+          <div className="flex-1 flex flex-col gap-4">
+            <LoadScript googleMapsApiKey="AIzaSyA2ddaLdvbkN_17pvuYqXp1YoM7zJAm2qg">
+              <GoogleMap mapContainerStyle={{ width: "100%", height: "400px" }} center={mapCenter} zoom={mapZoom}>
+                {filteredProperties.map((property) => (
+                  <Marker
+                    key={property.id}
+                    position={{ lat: property.lat, lng: property.lng }}
+                    onClick={() => setSelectedProperty(property)}
+                  />
+                ))}
+                {selectedProperty && (
+                  <InfoWindow position={{ lat: selectedProperty.lat, lng: selectedProperty.lng }} onCloseClick={() => setSelectedProperty(null)}>
+                    <div>
+                      <h4>{selectedProperty.name}</h4>
+                      <p>Price: ₹{selectedProperty.price.toLocaleString()}</p>
+                    </div>
+                  </InfoWindow>
+                )}
+              </GoogleMap>
+            </LoadScript>
+            <PropertyList properties={filteredProperties} />
+          </div>
+>>>>>>> origin/main
         </div>
       {/* Render Google Map Component */}
       <div className="md:w-3/4">

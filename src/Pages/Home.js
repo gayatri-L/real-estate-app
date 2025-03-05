@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import React, { useEffect, useState } from "react";
 // import Lottie from "lottie-react";
 // import Navbar from "../Components/Navbar";
@@ -124,7 +125,23 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import YourPreferences from "../components/YourPreferences";
 import ChatResponse from "../components/ChatResponse";
+=======
+
+import React, { useEffect, useState } from "react";
+import Lottie from "lottie-react";
+import Navbar from "../Components/Navbar";
+import Footer from "../Components/Footer";
+import YourPreferences from "../Components/YourPreferences";
+import ChatResponse from "../Components/ChatResponse";
+>>>>>>> origin/main
 import useOpenAI from "../hook/useOpenAI";
+import ImageSlider from "../Components/ImageSlider";
+import ProjectPriceChart from "./ProjectPriceChart";
+// import PropertySearch from "../Components/PropertySearch";
+
+// Import Material-UI Icons
+// import MenuIcon from "@mui/icons-material/Menu";
+import SidebarMenu from "../Components/SidebarMenu";
 
 // Import Material-UI Icons
 // import MenuIcon from "@mui/icons-material/Menu";
@@ -184,7 +201,23 @@ const Home = () => {
           </div>
         </main>
       )}
+<<<<<<< HEAD
 
+=======
+      {/* <div className="flex flex-col items-center justify-center flex-grow text-center">
+        <ImageSlider projectId={41}/>
+        <ImageSlider projectId={40}/>
+      </div> */}
+
+      {/* <div className="flex flex-col items-center justify-center flex-grow text-center"> */}
+        {/* <ProjectPriceChart /> */}
+      {/* </div> */}
+
+      
+      {/* <div className="flex flex-col items-center justify-center flex-grow text-center">
+      <PropertySearch/>
+      </div> */}
+>>>>>>> origin/main
       {/* Footer at the bottom */}
       <Footer />
     </div>

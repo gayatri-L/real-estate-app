@@ -1,0 +1,96 @@
+// ======================================
+// Gradle Build Script for Spring Boot Application
+// ======================================
+plugins {
+    id 'java'// Applies Java plugin for project compilation
+    id 'org.springframework.boot' version '3.4.3' // Spring Boot plugin for building and running the application
+    id 'io.spring.dependency-management' version '1.1.7' // Manages dependencies automatically
+}
+
+// ======================================
+// Project Metadata
+// ======================================
+group = 'com.example' // Defines the project’s group ID
+version = '0.0.1-SNAPSHOT' // Defines the project’s group ID
+
+
+// ======================================
+// Java Configuration
+// ======================================
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17) // Specifies Java 17 as the required version
+    }
+}
+
+// ======================================
+// Dependency Configurations
+// ======================================
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor // Ensures annotation processors are available at compile-time only
+    }
+}
+
+// ======================================
+// Repository Configuration
+// ======================================
+repositories {
+    mavenCentral() // Fetch dependencies from Maven Central repository
+}
+
+// ======================================
+// Project Dependencies
+// ======================================
+dependencies {
+    // -------------------------
+    // Spring Boot Dependencies
+    // -------------------------
+    
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // JPA + Hibernate support for database interactions
+    implementation 'org.springframework.boot:spring-boot-starter-web' // Enables Spring MVC for REST APIs
+    implementation 'org.springframework.boot:spring-boot-starter-actuator' // Adds monitoring & health checks
+   
+    // Validation Support
+    implementation 'org.springframework.boot:spring-boot-starter-validation' // Spring Boot validation framework
+    implementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final' // Hibernate Validator for Java Bean validation
+
+
+
+    // -------------------------
+    // Database Dependencies
+    // -------------------------
+    implementation 'org.postgresql:postgresql' // PostgreSQL JDBC Driver
+
+
+    // -------------------------
+    // OData Dependencies (For OData API support)
+    // -------------------------
+    implementation 'org.apache.olingo:odata-commons-api:4.7.1' // OData Commons API
+    implementation 'org.apache.olingo:odata-commons-core:4.7.1' // OData Commons Core
+    implementation 'org.apache.olingo:odata-server-api:4.7.1' // OData Server API
+    implementation 'org.apache.olingo:odata-server-core:4.7.1' // OData Server Core
+
+    // -------------------------
+    // JSON Processing for OData
+    // -------------------------
+    implementation 'jakarta.json:jakarta.json-api:2.1.2' // JSON API for Jakarta EE
+
+    // -------------------------
+    // Lombok (For reducing boilerplate code)
+    // -------------------------
+    compileOnly 'org.projectlombok:lombok' // Lombok for generating getters/setters automatically
+    annotationProcessor 'org.projectlombok:lombok' // Enables Lombok at compile time
+
+ // -------------------------
+    // Test Dependencies
+    // -------------------------
+    testImplementation 'org.springframework.boot:spring-boot-starter-test' // Spring Boot testing framework
+}
+
+// ======================================
+// Test Configuration
+// ======================================
+tasks.named('test') {
+    useJUnitPlatform()// Configures JUnit 5 as the test platform
+}
