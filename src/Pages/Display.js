@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import PropertyList from "../components/PropertyList";
-import PropertyFilters from "../components/PropertyFilters";
-import MapComponent from "../components/GoogleMap";
+import PropertyList from "../Components/PropertyList1";
+import PropertyFilters from "../Components/PropertyFilters";
+import MapComponent from "../Components/GoogleMap1";
 
 const Display_D = () => {
   // States for filters and properties

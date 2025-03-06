@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import PropertyDetails from "../components/PropertyDetails";
-import PropertyDropdowns from "../components/Propertydropdowns";
-import MapComponent from "../components/GoogleMap";
-import DemoNavbar from "../components/Navbar";
-//import DemoFooter from "../components/Footer";
+import PropertyDetails from "../Components/PropertyDetails";
+import PropertyDropdowns from "../Components/Propertydropdowns";
+import MapComponent from "../Components/GoogleMap1";
 
 const Display_D = () => {
   // States for filters and properties
@@ -94,7 +92,7 @@ const Display_D = () => {
   return (
    
     <div className="w-full p-4 bg-black min-h-screen">
-    <DemoNavbar />
+    {/* <DemoNavbar /> */}
 
     {/* Horizontal Filter Section */}
     <div className="flex justify-center items-center gap-4 bg-black p-4 rounded-lg mt-4">
