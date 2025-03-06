@@ -6,8 +6,8 @@ import Footer from "../Components/Footer";
 import YourPreferences from "../Components/YourPreferences";
 import ChatResponse from "../Components/ChatResponse";
 import useOpenAI from "../hook/useOpenAI";
-import ImageSlider from "../Components/ImageSlider";
-import ProjectPriceChart from "./ProjectPriceChart";
+// import ImageSlider from "../Components/ImageSlider";
+// import ProjectPriceChart from "./ProjectPriceChart";
 // import PropertySearch from "../Components/PropertySearch";
 
 // Import Material-UI Icons
@@ -68,10 +68,7 @@ const Home = () => {
           </div>
         </main>
       )}
-      {/* <div className="flex flex-col items-center justify-center flex-grow text-center">
-        <ImageSlider projectId={41}/>
-        <ImageSlider projectId={40}/>
-      </div> */}
+      
 
       {/* <div className="flex flex-col items-center justify-center flex-grow text-center"> */}
         {/* <ProjectPriceChart /> */}

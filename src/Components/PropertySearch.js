@@ -3,7 +3,7 @@ import { MenuItem, FormControl, Select, InputLabel, Button } from "@mui/material
 import { Search } from "@mui/icons-material";
 import DemoNavbar from "./DemoNavbar";
 import DemoFooter from "./DemoFooter";
-import PropertyList from "./PropertyList";
+import PropertyList1 from "./PropertyList1";
 
 const mockProperties = [
   {
@@ -127,7 +127,7 @@ const PropertySearch = () => {
 
       {/* ✅ Property List (Displays filtered properties) */}
       <div className="px-6 pb-6">
-        <PropertyList properties={filteredProperties} />
+        <PropertyList1 properties={filteredProperties} />
       </div>
 
        {/* ✅ Property List (Displays filtered properties) */}

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 // import Header from "../Components/Header";
 import PropertyFilters from "../Components/PropertyFilters";
-import PropertyList from "../Components/PropertyList";
+import PropertyList1 from "../Components/PropertyList1";
 
 const Display_D = () => {
   const [selectedLocation, setSelectedLocation] = useState("");
@@ -117,7 +117,7 @@ const Display_D = () => {
                 )}
               </GoogleMap>
             </LoadScript>
-            <PropertyList properties={filteredProperties} />
+            <PropertyList1 properties={filteredProperties} />
           </div>
         </div>
       </div>
