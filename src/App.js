@@ -48,7 +48,6 @@ const App = () => {
         <Route path="/version-display" element={<VersionDisplay />}></Route>
         <Route path="/show-needle" element={<ShowNeedle />}></Route>
         <Route path="/property-search" element={<PropertySearch1 />}></Route>
-       <Route path="/version-display" element={<VersionDisplay />}></Route>
        <Route path="/wing-details" element={<WingDetails />}></Route>
        <Route path="/show-formdata" element={<FormDataInput />}></Route>
       </Routes>

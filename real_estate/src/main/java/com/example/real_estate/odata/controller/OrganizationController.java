@@ -96,3 +96,76 @@ public class OrganizationController {
         }
     }
 }
+// =============================
+// OData Controller for Organization
+// =============================
+// package com.example.real_estate.odata.controller;
+
+// import com.example.real_estate.odata.model.Organization;
+// import com.example.real_estate.odata.service.OrganizationService;
+// import jakarta.validation.Valid;
+// import org.apache.olingo.odata2.api.annotation.edm.*;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.http.HttpStatus;
+// import org.springframework.http.ResponseEntity;
+// import org.springframework.validation.BindingResult;
+// import org.springframework.validation.FieldError;
+// import org.springframework.web.bind.annotation.*;
+
+// import java.util.HashMap;
+// import java.util.List;
+// import java.util.Map;
+// import java.util.Optional;
+
+// @CrossOrigin(origins = "http://localhost:3000")
+// @RestController
+// @RequestMapping("/odata/organization")
+// public class OrganizationController {
+
+//     @Autowired
+//     private OrganizationService organizationService;
+
+//     @EdmFunctionImport(name = "GetAllOrganizations", returnType = "Collection(Organization)")
+//     @GetMapping
+//     public List<Organization> getAllOrganizations() {
+//         return organizationService.getAllOrganizations();
+//     }
+
+//     @EdmFunctionImport(name = "GetOrganizationById", returnType = "Organization")
+//     @GetMapping("/{id}")
+//     public ResponseEntity<?> getOrganizationById(@PathVariable Integer id) {
+//         Optional<Organization> organization = organizationService.getOrganizationById(id);
+//         if (organization.isPresent()) {
+//             return ResponseEntity.ok(organization.get());
+//         } else {
+//             return ResponseEntity.status(HttpStatus.NOT_FOUND)
+//                     .body(Map.of("error", "Organization not found"));
+//         }
+//     }
+
+//     @EdmActionImport(name = "CreateOrganization")
+//     @PostMapping
+//     public ResponseEntity<?> createOrganization(@Valid @RequestBody Organization organization, BindingResult bindingResult) {
+//         if (bindingResult.hasErrors()) {
+//             Map<String, String> errors = new HashMap<>();
+//             for (FieldError error : bindingResult.getFieldErrors()) {
+//                 errors.put(error.getField(), error.getDefaultMessage());
+//             }
+//             return ResponseEntity.badRequest().body(errors);
+//         }
+//         Organization savedOrganization = organizationService.createOrganization(organization);
+//         return ResponseEntity.status(HttpStatus.CREATED).body(savedOrganization);
+//     }
+
+//     @EdmActionImport(name = "DeleteOrganization")
+//     @DeleteMapping("/{id}")
+//     public ResponseEntity<String> deleteOrganization(@PathVariable Integer id) {
+//         Optional<Organization> organization = organizationService.getOrganizationById(id);
+//         if (organization.isPresent()) {
+//             organizationService.deleteOrganization(id);
+//             return ResponseEntity.ok("Organization deleted successfully.");
+//         } else {
+//             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Organization not found.");
+//         }
+//     }
+// }

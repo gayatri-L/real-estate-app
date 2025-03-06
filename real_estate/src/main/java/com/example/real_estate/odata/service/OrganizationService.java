@@ -67,3 +67,47 @@ public class OrganizationService {
         organizationRepository.deleteById(id);
     }
 }
+// =============================
+// OData Service for Organization
+// =============================
+// package com.example.real_estate.odata.service;
+
+// import com.example.real_estate.odata.model.Organization;
+// import com.example.real_estate.odata.repository.OrganizationRepository;
+// import jakarta.validation.Valid;
+// import org.springframework.stereotype.Service;
+// import org.springframework.validation.annotation.Validated;
+// import org.apache.olingo.odata2.api.annotation.edm.*;
+
+// import java.util.List;
+// import java.util.Optional;
+
+// @Service
+// @Validated
+// public class OrganizationService {
+//     private final OrganizationRepository organizationRepository;
+
+//     public OrganizationService(OrganizationRepository organizationRepository) {
+//         this.organizationRepository = organizationRepository;
+//     }
+
+//     @EdmFunction(name = "GetAllOrganizations", returnType = "Collection(Organization)")
+//     public List<Organization> getAllOrganizations() {
+//         return organizationRepository.findAll();
+//     }
+
+//     @EdmFunction(name = "GetOrganizationById", returnType = "Organization")
+//     public Optional<Organization> getOrganizationById(Integer id) {
+//         return organizationRepository.findById(id);
+//     }
+
+//     @EdmAction(name = "CreateOrganization", entitySetPath = "Organizations")
+//     public Organization createOrganization(@Valid Organization organization) {
+//         return organizationRepository.save(organization);
+//     }
+
+//     @EdmAction(name = "DeleteOrganization", entitySetPath = "Organizations")
+//     public void deleteOrganization(Integer id) {
+//         organizationRepository.deleteById(id);
+//     }
+// }

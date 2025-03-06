@@ -66,10 +66,9 @@ dependencies {
     // -------------------------
     // OData Dependencies (For OData API support)
     // -------------------------
-    implementation 'org.apache.olingo:odata-commons-api:4.7.1' // OData Commons API
-    implementation 'org.apache.olingo:odata-commons-core:4.7.1' // OData Commons Core
-    implementation 'org.apache.olingo:odata-server-api:4.7.1' // OData Server API
-    implementation 'org.apache.olingo:odata-server-core:4.7.1' // OData Server Core
+
+    implementation 'org.apache.olingo:odata-server-api:4.9.0' // OData Server API
+    implementation 'org.apache.olingo:odata-server-core:4.9.0' // OData Server Core
 
     // -------------------------
     // JSON Processing for OData
