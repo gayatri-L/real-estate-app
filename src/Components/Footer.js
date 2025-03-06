@@ -1,8 +1,8 @@
 
 import React from "react";
-import { Facebook, Instagram, WhatsApp } from "@mui/icons-material";
-
-const Footer = () => {
+import { Email, Facebook, Twitter, Instagram, LinkedIn, Phone } from "@mui/icons-material";
+ 
+const DemoFooter = () => {
   return (
     <footer className=" text-white py-6 px-4 sm:px-8 md:px-16 lg:px-24 flex flex-col md:flex-row justify-between items-center border-t border-gray-700">
       <div className="text-center md:text-left">
@@ -21,5 +21,5 @@ const Footer = () => {
     </footer>
   );
 };
-
-export default Footer;
+ 
+export default DemoFooter;

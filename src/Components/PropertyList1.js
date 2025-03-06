@@ -1,107 +1,102 @@
 
-import React from "react";
-import { Card, CardContent, Typography, Grid } from "@mui/material";
-import { LocationOn, SquareFoot, Hotel } from "@mui/icons-material";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+// // import React from "react";
 
+// // const PropertyList = ({ properties }) => {
+// //   return (
+// //     <div className="property-list">
+// //       <h3>Available Properties</h3>
+// //       {properties.length === 0 ? (
+// //         <p>No properties found for selected filters.</p>
+// //       ) : (
+// //         <ul>
+// //           {properties.map((property) => (
+// //             <li key={property.id}>
+// //               <h4>{property.name}</h4>
+// //               <p>Location: {property.location}</p>
+// //               <p>Area: {property.area}</p>
+// //               <p>Price: ₹{property.price.toLocaleString()}</p>
+// //               <p>BHK: {property.bhk}</p>
+// //             </li>
+// //           ))}
+// //         </ul>
+// //       )}
+// //     </div>
+// //   );
+// // };
+
+// // export default PropertyList;
+// import React from "react";
+
+// //Display the Details from fetched data
+
+// const PropertyList = ({ properties }) => {
+//   console.log("Properties for list", properties);
+//   return (
+//     <div className="container mx-auto p-4">
+//       <h2 className="text-2xl font-bold mb-4">Property List</h2>
+//       <table className="w-full border-collapse border border-gray-300">
+//         <thead>
+//           <tr className="bg-gray-100">
+//             <th className="border border-gray-300 px-4 py-2">Project Name</th>
+//             <th className="border border-gray-300 px-4 py-2">Location</th>
+//             <th className="border border-gray-300 px-4 py-2">BHK Types</th>
+//             <th className="border border-gray-300 px-4 py-2">Phone</th>
+//             <th className="border border-gray-300 px-4 py-2">Rera Phone</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {properties.length > 0 ? (
+//             properties.map((property, index) => (
+//               <tr key={index} className="text-center">
+//                 <td className="border border-gray-300 px-4 py-2">{property.project_name || "N/A"}</td>
+//                 <td className="border border-gray-300 px-4 py-2">{property.location || "N/A"}</td>
+//                 <td className="border border-gray-300 px-4 py-2">
+//                   {property.bhk_1 ? "1 BHK, " : ""}
+//                   {property.bhk_2 ? "2 BHK, " : ""}
+//                   {property.bhk_3 ? "3 BHK" : ""}
+//                 </td>
+//                 <td className="border border-gray-300 px-4 py-2">{property.project_phone || "N/A"}</td>
+//                 <td className="border border-gray-300 px-4 py-2">{property.rera_phone || "N/A"}</td>
+//               </tr>
+//             ))
+//           ) : (
+//             <tr>
+//               <td colSpan="4" className="text-center py-4">No properties found</td>
+//             </tr>
+//           )}
+//         </tbody>
+//       </table>
+//     </div>
+//   );
+// };
+
+// export default PropertyList;
 const PropertyList = ({ properties }) => {
+  if (properties.length === 0) {
+    return <p className="text-gray-600">No properties found.</p>;
+  }
+
   return (
-    <div className="max-w-7xl mx-auto py-10 px-4 ">
-      <h3 className="text-3xl font-bold text-yellow-500 mb-6 text-center uppercase">
-        Available Properties
-      </h3>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {properties.map((property) => (
+        <div key={property.id} className=" border border-yellow-500 p-4 rounded-lg shadow-lg bg-gray-900">
+          <h2 className="text-lg font-semibold text-white">{property.project_name || "Unnamed Property"}</h2>
+          <p className="text-white">Location: {property.location || "Unknown"}</p>
+          
+          <p className="text-white">
+            BHK: 
+            {property.bhk_1 ? " 1 BHK" : ""}
+            {property.bhk_2 ? " 2 BHK" : ""}
+            {property.bhk_3 ? " 3 BHK" : ""}
+          </p>
+          
+          <p className="text-white">Budget: ₹{property.budget ? property.budget.toLocaleString() : "N/A"}</p>
 
-      {properties.length === 0 ? (
-        <p className="text-center text-gray-400">No properties found for selected filters.</p>
-      ) : (
-        <Grid container spacing={4} justifyContent="center" className="bg-black">
-          {properties.map((property) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={property.id}>
-              <Card className="bg-black text-white shadow-lg rounded-xl overflow-hidden border border-yellow-500">
-
-                {/* ✅ Image Slider (Swiper) */}
-                <Swiper
-                  modules={[Navigation, Pagination]}
-                  navigation
-                  pagination={{ clickable: true }}
-                  className="h-52"
-                >
-                  {property.images.map((img, index) => (
-                    <SwiperSlide key={index}>
-                      <img
-                        src={img}
-                        alt={`${property.name} ${index + 1}`}
-                        className="w-full h-full object-cover"
-                      />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-
-                {/* <CardContent className="p-4 bg-black">
-                  {/* Property Name */}
-                {/* <Typography variant="h6" className="text-yellow-400 font-semibold">
-                    {property.name}
-                  </Typography>
-                    {/* Price */}
-                {/* <Typography className="flex items-center text-gray-300 mt-1">
-                    <AttachMoney className="text-yellow-500 mr-1" /> ₹{property.price.toLocaleString()}
-                  </Typography>  */}
-
-                {/* Location */}
-                {/* <Typography className="flex items-center text-gray-300 mt-2">
-                    <LocationOn className="text-yellow-500 mr-1" /> {property.location}
-                  </Typography> */}
-
-                {/* Area */}
-                {/* <Typography className="flex items-center text-gray-300 mt-1">
-                    <SquareFoot className="text-yellow-500 mr-1" /> {property.area} sqft
-                  </Typography> */}
-
-
-
-                {/* BHK */}
-                {/* <Typography className="flex items-center text-gray-300 mt-1">
-                    <Hotel className="text-yellow-500 mr-1" /> {property.bhk} BHK
-                  </Typography>
-                </CardContent>  */}
-                <CardContent className="p-4 bg-black">
-                  {/* ✅ Name and Price in the Same Row */}
-                  <div className="flex justify-between items-center">
-                    <Typography variant="h6" className="text-yellow-400 font-semibold">
-                      {property.name}
-                    </Typography>
-                    <Typography className="flex items-center text-gray-300">
-                      ₹{property.price.toLocaleString()}
-                    </Typography>
-                  </div>
-
-                  {/* ✅ Location in One Row */}
-                  <Typography className="flex items-center text-gray-300 mt-2">
-                    <LocationOn className="text-yellow-500" /> {property.location}
-                  </Typography>
-
-                  {/* ✅ BHK and Sqft in the Same Row */}
-                  <div className="flex justify-between items-center mt-1">
-                    <Typography className="flex items-center text-gray-300">
-                      <SquareFoot className="text-yellow-500 mr-1" /> {property.area} sqft
-                    </Typography>
-                    <Typography className="flex items-center text-gray-300">
-                      <Hotel className="text-yellow-500 mr-1" /> {property.bhk} BHK
-                    </Typography>
-                  </div>
-                </CardContent>
-
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      )}
+        </div>
+      ))}
     </div>
   );
 };
 
 export default PropertyList;
+
