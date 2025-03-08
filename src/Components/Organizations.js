@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";c
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { fetchOrganizations, createOrganization } from "../api/OrganizationApi";
-
+ 
 const schema = yup.object().shape({
   orgName: yup
     .string()
@@ -25,15 +25,15 @@ const schema = yup.object().shape({
     .min(0, "Projects completed cannot be negative")
     .max(999, "Projects completed cannot exceed 999"),
 });
-
+ 
 const Organizations = () => {
   const [organizations, setOrganizations] = useState([]);
   const [backendErrors, setBackendErrors] = useState({}); // Store backend errors
-
+ 
   const { register, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
-
+ 
   useEffect(() => {
     const getOrganizations = async () => {
       const data = await fetchOrganizations();
@@ -41,7 +41,7 @@ const Organizations = () => {
     };
     getOrganizations();
   }, []);
-
+ 
   const onSubmit = async (data) => {
     try {
       const createdOrg = await createOrganization(data);
@@ -56,11 +56,11 @@ const Organizations = () => {
       }
     }
   };
-
+ 
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Organizations</h1>
-
+ 
       {/* List of Organizations */}
       <ul className="mb-4">
         {organizations.map((org) => (
@@ -69,25 +69,27 @@ const Organizations = () => {
           </li>
         ))}
       </ul>
-
+ 
       {/* Form to Add Organization */}
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
         <input {...register("orgName")} type="text" placeholder="Organization Name" className="border p-2" />
         <p className="text-red-500">{errors.orgName?.message || backendErrors?.orgName}</p>
-
+ 
         <input {...register("orgCin")} type="text" placeholder="CIN Number" className="border p-2" />
         <p className="text-red-500">{errors.orgCin?.message || backendErrors?.orgCin}</p>
-
+ 
         <input {...register("orgOwners")} type="text" placeholder="Owners" className="border p-2" />
         <p className="text-red-500">{errors.orgOwners?.message || backendErrors?.orgOwners}</p>
-
+ 
         <input {...register("projectsCompleted")} type="number" placeholder="Projects Completed" className="border p-2" />
         <p className="text-red-500">{errors.projectsCompleted?.message || backendErrors?.projectsCompleted}</p>
-
+ 
         <button type="submit" className="bg-blue-500 text-white p-2 rounded">Add Organization</button>
       </form>
     </div>
   );
 };
-
+ 
 export default Organizations;
+ 
+ 

@@ -24,7 +24,7 @@ import VersionDisplay from "./Pages/Version2_Display";
 import WingDetails from "./Components/wing_details";
 import ShowNeedle from "./Components/showneedle"
 import FormDataInput from "./Pages/FormData";
-import './App.css';
+
 
 const App = () => {
   return (

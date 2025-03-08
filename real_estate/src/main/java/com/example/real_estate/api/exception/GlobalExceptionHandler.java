@@ -1,5 +1,5 @@
 
-package com.example.real_estate.odata.exception;
+package com.example.real_estate.api.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
