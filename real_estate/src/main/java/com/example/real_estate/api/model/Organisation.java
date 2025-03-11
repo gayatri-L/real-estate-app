@@ -16,35 +16,41 @@ public class Organisation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "org_id", nullable = false)
-    private int org_id;
+    private int org_Id;
 
-    @NotBlank(message = "Organization name is required")
-    @Size(max = 100, message = "Name should be at most 100 characters")
+    @NotNull(message = "Organisation name is required")
+    @Size(max = 100, message = "Organisation name should be at most 100 characters")
+    @Pattern(regexp = "^[A-Za-z\s]+$", message = "Organisation name includes invalid characters.")
     @Column(name = "org_name")
-    private String org_name;
+    private String org_Name;
 
-    @Size(max = 21, message = "CIN should be at most 21 characters")
-    @Column(name = "org_cin", nullable = true)
-    private String org_cin;
+    @Column(name = "org_cin", unique = true)
+    @Size(max = 21, message = "CIN must not exceed 21 characters")
+    @Pattern(regexp = "^[A-Za-z0-9]+$", message = "CIN must contain only letters and numbers")
+    private String org_Cin;
+    
 
-    @Column(name = "org_owners", nullable = true)
+    @NotNull(message = "Owner name is required")
+    @Pattern(regexp = "^[A-Za-z\s]+$", message = "Owner name includes invalid characters.")
+    @Column(name = "org_owners", nullable = false)
     private String org_owners;
 
-    @Min(value = 0, message = "Projects completed must be >= 0")
-    @Max(value = 999, message = "Projects completed must be <= 999")
     @Column(name="projectscompleted", nullable = false)
-    private int projectscompleted;
+    @Min(value = 0, message = "Projects completed cannot be negative")
+    @Max(value = 999, message = "Projects completed is too high")
+    @NotNull(message = "Projects completed is required")
+    private Integer projectsCompleted;
 
     // One organisation has multiple projects
     @OneToMany(mappedBy = "organisation", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Project> projects;
 
-    public Organisation( String organisationCin, String organisationName, String organisationOwners, Integer projectcompleted) {
-        this.org_cin = organisationCin;
-        this.org_name = organisationName;
+    public Organisation( String organisationCin, String organisationName, String organisationOwners, Integer projectCompleted) {
+        this.org_Cin = organisationCin;
+        this.org_Name = organisationName;
         this.org_owners = organisationOwners;
-        this.projectscompleted = projectcompleted;
+        this.projectsCompleted = projectCompleted;
     }
     
 }

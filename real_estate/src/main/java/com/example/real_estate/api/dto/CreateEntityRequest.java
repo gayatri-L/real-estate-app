@@ -1,6 +1,8 @@
 package com.example.real_estate.api.dto;
 
 import com.example.real_estate.api.model.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 // import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -36,11 +38,24 @@ public class CreateEntityRequest {
     private String reraNumber;
     private String reraLink;
     private String projectVideoLink;
+
+    @JsonProperty("projectimages")
     private List<String> projectImages;
+
+    @JsonProperty("schools")
     private List<String> schools;
+
+    @JsonProperty("hospitals")
     private List<String> hospitals;
+
+    @JsonProperty("malls")
     private List<String> malls;
+
+    @JsonProperty("movieTheaters")
     private List<String> movieTheaters;
+
+    @JsonProperty("itParks")
+    private List<String> itParks;
 
      // Project Details Fields
      private Integer units;
@@ -50,13 +65,15 @@ public class CreateEntityRequest {
      private Integer priceMin;
      private Integer priceMax;
      private Boolean allInclusive;
+     
      private String amenities;
      private String coveredParking;
      private Boolean bankApproved;
      private String banks;
 
     // BHK Configurations
-    private OneBHKConfig oneBHKConfig;
+    @JsonProperty("oneBHKConfig")
+    private List<OneBHKConfig> oneBHKConfig;
     private TwoBHKConfig twoBHKConfig;
     private ThreeBHKConfig threeBHKConfig;
     private FourBHKConfig fourBHKConfig;

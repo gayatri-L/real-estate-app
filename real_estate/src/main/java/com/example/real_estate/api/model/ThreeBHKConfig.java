@@ -1,3 +1,90 @@
+// package com.example.real_estate.api.model;
+
+// import jakarta.persistence.*;
+// import jakarta.validation.constraints.*;
+// import lombok.*;
+
+// /**
+//  * Represents the configuration details for 3BHK units in a real estate project.
+//  * This entity is linked to the {@link Project} entity.
+//  */
+// @Entity
+// @Table(name = "threebhk_config")
+// @Getter
+// @Setter
+// @NoArgsConstructor
+// @AllArgsConstructor
+// @ToString
+// public class ThreeBHKConfig {
+
+//     /**
+//      * Unique identifier for the 3BHK configuration.
+//      */
+//     @Id
+//     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//     @Column(name = "threebhk_config_id")
+//     private Integer threeBhkConfigId;
+
+//     /**
+//      * The project to which this configuration belongs.
+//      */
+//     @ManyToOne
+//     @JoinColumn(name = "project_id", nullable = false)
+//     private Project project;
+
+//     /**
+//      * Number of units available for this 3BHK configuration.
+//      */
+//     @NotNull(message = "Units cannot be null")
+//     @Min(value = 1, message = "Units must be greater than 0")
+//     @Column(name = "type_3_units", nullable = false)
+//     private Integer type3Units;
+
+//     /**
+//      * Total area of the 3BHK unit (in square feet).
+//      */
+//     @NotNull(message = "Area cannot be null")
+//     @Min(value = 1, message = "Area must be greater than 0")
+//     @Column(name = "type_3_area", nullable = false)
+//     private Integer type3Area;
+
+//     /**
+//      * Floor plan details for the 3BHK unit.
+//      */
+//     @Column(name = "type_3_floor_plan", columnDefinition = "TEXT")
+    
+//     private String type3FloorPlan;
+
+//     /**
+//      * Image URLs for the 3BHK unit.
+//      */
+//     @Column(name = "type_3_images", columnDefinition = "TEXT")
+//     private String type3Images;
+
+//     /**
+//      * Number of bathrooms in the 3BHK unit.
+//      */
+//     @NotNull(message = "Number of bathrooms cannot be null")
+//     @Min(value = 0, message = "Bathrooms must be 0 or more")
+//     @Column(name = "type_3_bathrooms", nullable = false)
+//     private Integer type3Bathrooms;
+
+//     /**
+//      * Number of balconies in the 3BHK unit.
+//      */
+//     @NotNull(message = "Number of balconies cannot be null")
+//     @Min(value = 0, message = "Balconies must be 0 or more")
+//     @Column(name = "type_3_balcony", nullable = false)
+//     private Integer type3Balcony;
+
+//     /**
+//      * Number of parking spaces available for the 3BHK unit.
+//      */
+//     @NotNull(message = "Number of parking spaces cannot be null")
+//     @Min(value = 0, message = "Parking spaces must be 0 or more")
+//     @Column(name = "type_3_parking", nullable = false)
+//     private Integer type3Parking;
+// }
 package com.example.real_estate.api.model;
 
 import jakarta.persistence.*;
@@ -23,12 +110,12 @@ public class ThreeBHKConfig {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "threebhk_config_id")
-    private Integer threeBhkConfigId;
+    private Integer threeBhkConfigId; // Changed from Integer to Long
 
     /**
      * The project to which this configuration belongs.
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // Optimized FetchType
     @JoinColumn(name = "project_id", nullable = false)
     private Project project;
 
@@ -51,13 +138,15 @@ public class ThreeBHKConfig {
     /**
      * Floor plan details for the 3BHK unit.
      */
-    @Column(name = "type_3_floor_plan", columnDefinition = "TEXT")
+     // Changed from columnDefinition = "TEXT"
+    @Column(name = "type_3_floor_plan",columnDefinition = "TEXT")
     private String type3FloorPlan;
 
     /**
      * Image URLs for the 3BHK unit.
      */
-    @Column(name = "type_3_images", columnDefinition = "TEXT")
+    @Lob // Changed from columnDefinition = "TEXT"
+    @Column(name = "type_3_images",columnDefinition = "TEXT")
     private String type3Images;
 
     /**
@@ -65,6 +154,7 @@ public class ThreeBHKConfig {
      */
     @NotNull(message = "Number of bathrooms cannot be null")
     @Min(value = 0, message = "Bathrooms must be 0 or more")
+    @Max(value = 5, message = "Bathrooms cannot exceed 5") // Logical limit
     @Column(name = "type_3_bathrooms", nullable = false)
     private Integer type3Bathrooms;
 
@@ -73,6 +163,7 @@ public class ThreeBHKConfig {
      */
     @NotNull(message = "Number of balconies cannot be null")
     @Min(value = 0, message = "Balconies must be 0 or more")
+    @Max(value = 5, message = "Balconies cannot exceed 5") // Logical limit
     @Column(name = "type_3_balcony", nullable = false)
     private Integer type3Balcony;
 
@@ -81,6 +172,7 @@ public class ThreeBHKConfig {
      */
     @NotNull(message = "Number of parking spaces cannot be null")
     @Min(value = 0, message = "Parking spaces must be 0 or more")
+    @Max(value = 3, message = "Parking spaces cannot exceed 3") // Logical limit
     @Column(name = "type_3_parking", nullable = false)
     private Integer type3Parking;
 }

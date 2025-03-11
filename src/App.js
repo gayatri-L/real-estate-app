@@ -15,6 +15,7 @@ import PriceScatterChart from "./Components/PriceScatterChart";
 import PriceBarChart from "./Components/PriceBarChart";
 import ScatterChartComponent from "./Components/ScatterChartComponent";
 import Organizations from "./Components/Organizations";
+// import MultiStageForm1 from "./Components/MultiStageForm1";
 // import DisplayImages from "./components/DisplayImages";
 // import MultipleImageUpload from "./components/MultipleImageUpload";
 // import SingleImageDisplay from "./components/SingleImageDisplay";
@@ -24,6 +25,10 @@ import VersionDisplay from "./Pages/Version2_Display";
 import WingDetails from "./Components/wing_details";
 import ShowNeedle from "./Components/showneedle"
 import FormDataInput from "./Pages/FormData";
+import MultiStageForm from "./Components/MultiStageForm";
+import ProjectList from "./Pages/PropertyAllData";
+import LatestEntity from "./Components/LatestEntity";
+import "./App.css";
 
 
 const App = () => {
@@ -50,15 +55,16 @@ const App = () => {
         <Route path="/property-search" element={<PropertySearch1 />}></Route>
        <Route path="/wing-details" element={<WingDetails />}></Route>
        <Route path="/show-formdata" element={<FormDataInput />}></Route>
+       {/* <Route path="/multi-stage-form" element={<MultiStageForm1 />}></Route> */}
+      <Route path="/ShowForm" element={<MultiStageForm />}></Route>
+      <Route path="/project-list" element={<ProjectList />}></Route>
+      <Route path="/latest-entity" element={<LatestEntity />}></Route>
       </Routes>
        {/* <Route path="/" element={<Home />}></Route>
        <Route path="/displayimages" element={<DisplayImages />}></Route>
        <Route path="/multiple-upload" element={<MultipleImageUpload />}></Route>
        <Route path="/single-upload" element={<SingleImageUpload />}></Route>
        <Route path="/single-display" element={<SingleImageDisplay />}></Route>
-       
-
-      
        </Routes> */}
     </Router>
    

@@ -9,7 +9,7 @@ import lombok.*;
  * This entity is linked to the {@link Project} entity.
  */
 @Entity
-@Table(name = "onebhk_config")
+@Table(name = "onebhk_config",uniqueConstraints = {@UniqueConstraint(columnNames = {"project_id", "type_number"})})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,14 +23,22 @@ public class OneBHKConfig {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "onebhk_config_id")
-    private Integer oneBhkConfigId;
+    private Integer oneBhkConfigId; // Changed from Integer to Long
 
     /**
      * The project to which this configuration belongs.
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // Added Lazy Fetch
     @JoinColumn(name = "project_id", nullable = false)
     private Project project;
+
+    /**
+     * Type number to differentiate multiple configurations within a project.
+     */
+    @NotNull(message = "Type number cannot be null")
+    @Min(value = 1, message = "Type number must be greater than 0")
+    @Column(name = "type_number", nullable = false)
+    private Integer typeNumber;
 
     /**
      * Number of units available for this 1BHK configuration.
@@ -51,13 +59,15 @@ public class OneBHKConfig {
     /**
      * Floor plan details for the 1BHK unit.
      */
-    @Column(name = "type_1_floor_plan", columnDefinition = "TEXT")
+    @Lob // Alternative for TEXT fields
+    @Column(name = "type_1_floor_plan",columnDefinition = "TEXT")
     private String type1FloorPlan;
 
     /**
      * Image URLs for the 1BHK unit.
      */
-    @Column(name = "type_1_images", columnDefinition = "TEXT")
+    @Lob // Alternative for TEXT fields
+    @Column(name = "type_1_images",columnDefinition = "TEXT")
     private String type1Images;
 
     /**
@@ -83,4 +93,36 @@ public class OneBHKConfig {
     @Min(value = 0, message = "Parking spaces must be 0 or more")
     @Column(name = "type_1_parking", nullable = false)
     private Integer type1Parking;
+
+    // Hall area in square feet.
+    
+   @Column(name = "hall_area")
+   private String hallArea;
+
+   /**
+    * Kitchen area in square feet.
+    */
+   @Column(name = "kitchen_area")
+   private String kitchenArea;
+
+   /**
+    * Area of the first bedroom.
+    */
+   @Column(name = "bedroom_1_area")
+   private String bedroom1Area;
+
+   /**
+    * Area of the first bathroom.
+    */
+   @Column(name = "bathroom_1_area")
+   private String bathroom1Area;
+
+   /**
+    * Area of the second bathroom (if applicable).
+    */
+   @Column(name = "bathroom_2_area")
+   private String bathroom2Area;
+
+
+
 }
