@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+import java.util.*;
 
 @Entity
 @Table(name = "projects")
@@ -23,6 +26,9 @@ public class Project {
     @JoinColumn(name = "org_id", nullable = false)
     @JsonIgnore
     private Organisation organisation;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProjectTimeLine> timelines;
 
     @NotNull(message = "Project name is required")
     @Column(name = "projectname", length = 200, nullable = false)
@@ -69,8 +75,9 @@ public class Project {
     @Column(name = "projectvideolink", length = 255)
     private String projectVideoLink;
 
-    @Column(name = "projectimages", columnDefinition = "TEXT")
-    private String projectImages;
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "projectimages", columnDefinition = "JSONB")
+    private List<String> projectImages;
 
     @Column(name = "schools", columnDefinition = "TEXT")
     // @Pattern(regexp = "^[A-Za-z0-9\\s]+$", message = "Invalid format")
@@ -100,7 +107,7 @@ public class Project {
     public Project(Organisation organisation, String projectName, String city, String locality, String address,
                    Double latitude, Double longitude, Integer propertyAreaSqmt,
                    String reraNumber, String reraLink, String projectVideoLink,
-                   String projectImages, String schools, String hospitals, 
+                   List<String> projectImages, String schools, String hospitals, 
                    String malls, String movieTheaters,String itParks, Boolean deleted) {
 
         this.organisation = organisation;

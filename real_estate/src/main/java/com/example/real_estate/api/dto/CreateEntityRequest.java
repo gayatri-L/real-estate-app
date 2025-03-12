@@ -74,9 +74,24 @@ public class CreateEntityRequest {
     // BHK Configurations
     @JsonProperty("oneBHKConfig")
     private List<OneBHKConfig> oneBHKConfig;
-    private TwoBHKConfig twoBHKConfig;
-    private ThreeBHKConfig threeBHKConfig;
-    private FourBHKConfig fourBHKConfig;
-    private FiveBHKConfig fiveBHKConfig;
-    private PenthouseConfig penthouseConfig;
+
+    @JsonProperty("twoBHKConfig")
+    private List<TwoBHKConfig> twoBHKConfig;
+
+    @JsonProperty("threeBHKConfig")
+    private List<ThreeBHKConfig> threeBHKConfig;
+
+    @JsonProperty("fourBHKConfig")
+    private List<FourBHKConfig> fourBHKConfig;
+
+    @JsonProperty("fiveBHKConfig")
+    private List<FiveBHKConfig> fiveBHKConfig;
+
+    @JsonProperty("penthouseConfig")
+    private List<PenthouseConfig> penthouseConfig;
+
+    // New Field: Project Timeline
+    @JsonProperty("projectTimeline")
+    private List<ProjectTimeLine> projectTimeline;
+
 }

@@ -3,7 +3,9 @@ package com.example.real_estate.api.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
-
+import java.util.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 /**
  * Represents the configuration details for 1BHK units in a real estate project.
  * This entity is linked to the {@link Project} entity.
@@ -35,9 +37,9 @@ public class OneBHKConfig {
     /**
      * Type number to differentiate multiple configurations within a project.
      */
-    @NotNull(message = "Type number cannot be null")
+    // @NotNull(message = "Type number cannot be null")
     @Min(value = 1, message = "Type number must be greater than 0")
-    @Column(name = "type_number", nullable = false)
+    @Column(name = "type_number")
     private Integer typeNumber;
 
     /**
@@ -59,16 +61,21 @@ public class OneBHKConfig {
     /**
      * Floor plan details for the 1BHK unit.
      */
-    @Lob // Alternative for TEXT fields
-    @Column(name = "type_1_floor_plan",columnDefinition = "TEXT")
-    private String type1FloorPlan;
+     // Alternative for TEXT fields
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "type_1_floor_plan",columnDefinition = "JSONB")
+    private List<String> type1FloorPlan;
 
     /**
      * Image URLs for the 1BHK unit.
+     * 
      */
-    @Lob // Alternative for TEXT fields
-    @Column(name = "type_1_images",columnDefinition = "TEXT")
-    private String type1Images;
+    // ✅ Use JSONB for images
+    // @Convert(converter = StringListConverter.class)
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "type_1_images", columnDefinition = "JSONB")
+    private List<String> type1Images;
+
 
     /**
      * Number of bathrooms in the 1BHK unit.

@@ -75,6 +75,8 @@ dependencies {
     // -------------------------
     implementation 'jakarta.json:jakarta.json-api:2.1.2' // JSON API for Jakarta EE
 
+    implementation 'com.vladmihalcea:hibernate-types-60:2.21.1'
+
     // -------------------------
     // Lombok (For reducing boilerplate code)
     // -------------------------

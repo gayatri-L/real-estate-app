@@ -51,4 +51,5 @@ public class GetEntityResponse {
     private FourBHKConfig fourBHKConfig;
     private FiveBHKConfig fiveBHKConfig;
     private PenthouseConfig penthouseConfig;
+    private ProjectTimeLine projectTimeLine;
 }
