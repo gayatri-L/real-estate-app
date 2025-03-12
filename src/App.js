@@ -29,6 +29,8 @@ import MultiStageForm from "./Components/MultiStageForm";
 import ProjectList from "./Pages/PropertyAllData";
 import LatestEntity from "./Components/LatestEntity";
 import "./App.css";
+import DisplayProperty from "./Pages/DisplayProperty";
+import PostwithForm from "./Pages/PostwithForm";
 
 
 const App = () => {
@@ -59,6 +61,8 @@ const App = () => {
       <Route path="/ShowForm" element={<MultiStageForm />}></Route>
       <Route path="/project-list" element={<ProjectList />}></Route>
       <Route path="/latest-entity" element={<LatestEntity />}></Route>
+      <Route path="/display-property" element={<DisplayProperty />}></Route>
+      <Route path="/post-with-form" element={<PostwithForm/>}></Route>
       </Routes>
        {/* <Route path="/" element={<Home />}></Route>
        <Route path="/displayimages" element={<DisplayImages />}></Route>
