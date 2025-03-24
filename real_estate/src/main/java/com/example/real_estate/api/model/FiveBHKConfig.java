@@ -13,7 +13,7 @@ import java.util.*;
  * Represents the configuration details for 5BHK units in a real estate project.
  * This entity is linked to the {@link Project} entity.
  */
-@Entity
+@Entity 
 @Table(name = "fivebhk_config",uniqueConstraints = @UniqueConstraint(columnNames = {"project_id","type_number"}))
 @Getter
 @Setter
@@ -22,7 +22,7 @@ import java.util.*;
 @ToString
 public class FiveBHKConfig {
 
-    /**
+    /*
      * Unique identifier for the 5BHK configuration.
      */
     @Id
@@ -30,7 +30,7 @@ public class FiveBHKConfig {
     @Column(name = "fivebhk_config_id")
     private Integer fiveBhkConfigId; // Changed from Integer to Long
 
-    /**
+    /*
      * The project to which this configuration belongs.
      */
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // Optimized FetchType
@@ -41,7 +41,7 @@ public class FiveBHKConfig {
     @Column(name = "type_number")
     private Integer typeNumber;
 
-    /**
+    /*
      * Number of units available for this 5BHK configuration.
      */
     @NotNull(message = "Units cannot be null")
@@ -49,7 +49,7 @@ public class FiveBHKConfig {
     @Column(name = "type_5_units", nullable = false)
     private Integer type5Units;
 
-    /**
+    /*
      * Total area of the 5BHK unit (in square feet).
      */
     @NotNull(message = "Area cannot be null")
@@ -57,21 +57,21 @@ public class FiveBHKConfig {
     @Column(name = "type_5_area", nullable = false)
     private Integer type5Area;
 
-    /**
+    /*
      * Floor plan details for the 5BHK unit.
      */
     @JdbcTypeCode(SqlTypes.JSON)  // Changed from columnDefinition = "TEXT"
     @Column(name = "type_5_floor_plan",columnDefinition = "JSONB")
     private List<String> type5FloorPlan;
 
-    /**
+    /*
      * Image URLs for the 5BHK unit.
      */
     @JdbcTypeCode(SqlTypes.JSON)// Changed from columnDefinition = "TEXT"
     @Column(name = "type_5_images")
     private List<String> type5Images;
 
-    /**
+    /*
      * Number of bathrooms in the 5BHK unit.
      */
     @NotNull(message = "Number of bathrooms cannot be null")
@@ -80,7 +80,7 @@ public class FiveBHKConfig {
     @Column(name = "type_5_bathrooms", nullable = false)
     private Integer type5Bathrooms;
 
-    /**
+    /*
      * Number of balconies in the 5BHK unit.
      */
     @NotNull(message = "Number of balconies cannot be null")
@@ -89,7 +89,7 @@ public class FiveBHKConfig {
     @Column(name = "type_5_balcony", nullable = false)
     private Integer type5Balcony;
 
-    /**
+    /*
      * Number of parking spaces available for the 5BHK unit.
      */
     @NotNull(message = "Number of parking spaces cannot be null")
@@ -103,7 +103,7 @@ public class FiveBHKConfig {
    @Column(name = "hall_area")
    private String hallArea; 
 
-   /**
+   /*
     * Kitchen area in square feet.
     */
    @Column(name = "kitchen_area")

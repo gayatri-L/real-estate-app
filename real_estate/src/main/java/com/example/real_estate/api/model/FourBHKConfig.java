@@ -104,7 +104,7 @@ public class FourBHKConfig {
    @Column(name = "hall_area")
    private String hallArea; 
 
-   /**
+   /*
     * Kitchen area in square feet.
     */
    @Column(name = "kitchen_area")

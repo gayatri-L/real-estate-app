@@ -1,11 +1,13 @@
-
-
+// Package declaration: Defines the package where this class belongs
 package com.example.real_estate.api.model;
+
+// Importing necessary Hibernate annotation for handling database column types
 import org.hibernate.annotations.JdbcTypeCode;
-// import org.hibernate.annotations.processing.SQL;
+// import org.hibernate.annotations.processing.SQL; (Commented out as it's not being used)
 import org.hibernate.type.SqlTypes;
 import java.util.*;
 
+// Importing Jakarta Persistence (JPA) and validation annotations for entity mapping and constraints
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -14,41 +16,42 @@ import lombok.*;
  * Represents the configuration details for Penthouse units in a real estate project.
  * This entity is linked to the {@link Project} entity.
  */
-@Entity
-@Table(name = "penthouse_config",uniqueConstraints = @UniqueConstraint(columnNames = {"project_id","type_number"}))
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
+@Entity // Marks this class as a JPA entity
+@Table(name = "penthouse_config", uniqueConstraints = @UniqueConstraint(columnNames = {"project_id", "type_number"})) // Defines table name and unique constraints
+@Getter // Lombok annotation to generate getter methods
+@Setter // Lombok annotation to generate setter methods
+@NoArgsConstructor // Lombok annotation to generate a no-args constructor
+@AllArgsConstructor // Lombok annotation to generate an all-args constructor
+@ToString // Lombok annotation to generate toString() method
 public class PenthouseConfig {
 
     /**
      * Unique identifier for the Penthouse configuration.
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "penthouse_config_id")
-    private Integer penthouseConfigId; // Changed from Integer to Long
+    @Id // Marks this field as the primary key
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generates the primary key value
+    @Column(name = "penthouse_config_id") // Maps this field to the specified column name
+    private Integer penthouseConfigId;  // Changed from Integer to Long
 
     /**
      * The project to which this Penthouse configuration belongs.
      */
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // Optimized FetchType
-    @JoinColumn(name = "project_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // Defines many-to-one relationship with lazy loading
+    @JoinColumn(name = "project_id", nullable = false) // Foreign key column
     private Project project;
 
 
-    @Min(value = 1, message = "Type number must be greater than 0")
-    @Column(name = "type_number")
+    @Min(value = 1, message = "Type number must be greater than 0") // Ensures type number is at least 1
+    @Column(name = "type_number") // Maps this field to the specified column
     private Integer typeNumber;
+    
     /**
      * Number of penthouse units available in this configuration.
      */
-    @NotNull(message = "Units cannot be null")
-    @Min(value = 1, message = "Units must be greater than 0")
-    @Column(name = "penthouse_units", nullable = false)
-    private Integer penthouseUnits;
+    @NotNull(message = "Units cannot be null") // Ensures the value is not null
+    @Min(value = 1, message = "Units must be greater than 0") // Ensures at least one unit exists
+    @Column(name = "penthouse_units", nullable = false) // Maps field to column, cannot be null
+    private Integer penthouseUnits;;
 
     /**
      * Total area of the penthouse unit (in square feet).
@@ -61,8 +64,8 @@ public class PenthouseConfig {
     /**
      * Floor plan details for the penthouse unit.
      */
-    @JdbcTypeCode(SqlTypes.JSON)// Changed from columnDefinition = "TEXT"
-    @Column(name = "penthouse_floor_plan",columnDefinition = "JSONB")
+    @JdbcTypeCode(SqlTypes.JSON) // Defines column type as JSON
+    @Column(name = "penthouse_floor_plan", columnDefinition = "JSONB") // Stores floor plan details in JSON format
     private List<String> penthouseFloorPlan;
 
     /**

@@ -24,7 +24,7 @@ app.use("/uploads", express.static("uploads"));
 app.get("/api/full-details", async (req, res) => {
   try {
     const query = `
-      SELECT 
+      SELECT
         o.org_id,
         o.org_name,
         o.org_email,

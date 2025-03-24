@@ -94,8 +94,8 @@ import java.util.Map;
  * across the entire Spring Boot application globally.
  * It captures and returns meaningful error responses instead of stack traces.
  */
-@ControllerAdvice // Enables global exception handling for all controllers
-@RestControllerAdvice // Combines @ControllerAdvice with @ResponseBody for REST APIs
+@ControllerAdvice // ✅ Enables global exception handling for all controllers
+@RestControllerAdvice // ✅ Combines @ControllerAdvice with @ResponseBody to ensure JSON responses for REST APIs
 public class GlobalExceptionHandler {
 
     /**
@@ -107,11 +107,14 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
+        Map<String, String> errors = new HashMap<>(); // ✅ Stores validation errors as key-value pairs
+        
+        // ✅ Extracts field-specific validation errors and maps them to their messages.
         for (FieldError error : ex.getBindingResult().getFieldErrors()) {
             errors.put(error.getField(), error.getDefaultMessage());
         }
-        return ResponseEntity.badRequest().body(errors);
+        
+        return ResponseEntity.badRequest().body(errors); // ✅ Returns 400 Bad Request with error details.
     }
 
     /**
@@ -123,14 +126,18 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<Map<String, String>> handleConstraintViolationException(ConstraintViolationException ex) {
-        Map<String, String> errors = new HashMap<>();
+        Map<String, String> errors = new HashMap<>(); // ✅ Stores validation constraint violations
+        
+        // ✅ Loops through each validation violation and adds it to the error map.
         for (ConstraintViolation<?> violation : ex.getConstraintViolations()) {
-            String fieldName = violation.getPropertyPath().toString();
-            String errorMessage = violation.getMessage();
+            String fieldName = violation.getPropertyPath().toString(); // ✅ Retrieves the field that caused the error.
+            String errorMessage = violation.getMessage(); // ✅ Gets the error message.
             errors.put(fieldName, errorMessage);
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+        
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors); // ✅ Returns 400 Bad Request.
     }
+
 
     /**
      * Handles database constraint violations, such as unique key constraints or foreign key violations.
@@ -155,9 +162,10 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-public ResponseEntity<Map<String, String>> handleJsonParseError(HttpMessageNotReadableException ex) {
-    Map<String, String> errorResponse = new HashMap<>();
-    errorResponse.put("error", "Invalid input: " + ex.getMostSpecificCause().getMessage());
-    return ResponseEntity.badRequest().body(errorResponse);
-}
+    public ResponseEntity<Map<String, String>> handleJsonParseError(HttpMessageNotReadableException ex) {
+        Map<String, String> errorResponse = new HashMap<>(); // ✅ Stores error message
+        errorResponse.put("error", "Invalid input: " + ex.getMostSpecificCause().getMessage());
+        return ResponseEntity.badRequest().body(errorResponse); // ✅ Returns 400 Bad Request with error details.
+    }
+
 }

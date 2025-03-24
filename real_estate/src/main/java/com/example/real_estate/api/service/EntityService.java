@@ -1,4 +1,3 @@
-
 package com.example.real_estate.api.service;
 
 import com.example.real_estate.api.model.*;

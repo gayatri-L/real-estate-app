@@ -118,7 +118,7 @@ public class OneBHKConfig {
    @Column(name = "bedroom_1_area")
    private String bedroom1Area;
 
-   /**
+   /*
     * Area of the first bathroom.
     */
    @Column(name = "bathroom_1_area")
